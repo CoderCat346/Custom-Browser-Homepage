@@ -170,3 +170,8 @@ toggleFormBtn.addEventListener('click', () => {
 // Run on first page load
 renderShortcuts();
 updateFolderDropdowns();
+
+
+export function initShortcuts() {
+  console.log("Shortcuts ready") ;
+}
