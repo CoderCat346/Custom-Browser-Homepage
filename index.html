@@ -25,22 +25,23 @@
 
 
             <main>
-                <!-- <div id="markdown-tree"></div> -->
-                <!-- <div>
-                    <a href="https://duckduckgo.com/">DuckDuckGo</a> <br>
-                    <a href="https://www.youtube.com/">YouTube</a> <br>
-                </div> -->
-
                 <div>
                     <h2>My Shortcuts</h2>
-                        <div id="shortcuts"></div>
+                    <div id="shortcuts"></div> <br>
 
+                    <!-- Add Shortcut Toggle -->
+                    <button id="toggleFormBtn">＋</button>
+
+                    <!-- Hidden Form Initially -->
+                    <div id="formContainer" style="display: none; margin-top: 10px;">
                         <h3>Add Shortcut</h3>
                         <form id="shortcutForm">
                             <input type="text" id="name" placeholder="Name" required>
                             <input type="url" id="url" placeholder="https://example.com" required>
                             <button type="submit">Add</button>
                         </form>
+                    </div>
+
                 </div>
 
             </main>

@@ -73,3 +73,18 @@ form.addEventListener('submit', e => {
 
 // Initial rendering when the page first loads
 renderShortcuts();
+
+// Get the toggle button and form container
+const toggleFormBtn = document.getElementById('toggleFormBtn');
+const formContainer = document.getElementById('formContainer');
+
+// Toggle form visibility when '+' is clicked
+toggleFormBtn.addEventListener('click', () => {
+    if (formContainer.style.display === 'none') {
+        formContainer.style.display = 'block';
+        toggleFormBtn.textContent = '−'; // Change to minus when open
+    } else {
+        formContainer.style.display = 'none';
+        toggleFormBtn.textContent = '＋'; // Back to plus when closed
+    }
+});
