@@ -1,90 +1,172 @@
-// Get the form element by its ID
-const form = document.getElementById('shortcutForm');
-
-// Get the div where shortcuts will be displayed
+// Get references to DOM elements (parts of the HTML)
+const shortcutForm = document.getElementById('shortcutForm');
+const folderForm = document.getElementById('folderForm');
 const shortcutsDiv = document.getElementById('shortcuts');
-
-// Load existing shortcuts from localStorage (if any)
-// If there are none, use an empty array instead
-const shortcuts = JSON.parse(localStorage.getItem('shortcuts') || '[]');
-
-// Function to display the shortcuts on the page
-function renderShortcuts() {
-    // Clear the current list of shortcuts (start fresh)
-    shortcutsDiv.innerHTML = '';
-
-    // Loop through each shortcut in the array
-    shortcuts.forEach((shortcut, index) => {
-        // Create a link (<a>) element for the shortcut
-        const a = document.createElement('a');
-        a.href = shortcut.url;               // Set the link URL
-        a.textContent = shortcut.name;       // Set the link text
-        a.target = "_blank";                 // Open the link in a new tab
-        a.className = "shortcut";            // Add a class for styling (optional)
-
-        // Create a remove (❌) button
-        const removeBtn = document.createElement('button');
-        removeBtn.textContent = '❌';         // Button text is a red cross
-        removeBtn.style.marginLeft = '10px';  // Adds space between link and button
-        removeBtn.onclick = () => {
-            // Remove this shortcut from the array
-            shortcuts.splice(index, 1);
-
-            // Save the updated list and refresh the display
-            saveAndRender();
-        };
-
-        // Create a container for each shortcut (link + delete button)
-        const div = document.createElement('div');
-        div.appendChild(a);           // Add the link to the container
-        div.appendChild(removeBtn);  // Add the remove button to the container
-
-        // Add the container to the shortcuts list on the page
-        shortcutsDiv.appendChild(div);
-    });
-}
-
-// Function to save the shortcuts to localStorage and re-display them
-function saveAndRender() {
-    // Save the current list of shortcuts to the browser's localStorage
-    localStorage.setItem('shortcuts', JSON.stringify(shortcuts));
-
-    // Display the updated list
-    renderShortcuts();
-}
-
-// When the form is submitted...
-form.addEventListener('submit', e => {
-    e.preventDefault();  // Prevent the page from reloading
-
-    // Get the values entered in the form inputs
-    const name = document.getElementById('name').value;
-    const url = document.getElementById('url').value;
-
-    // Add the new shortcut to the list
-    shortcuts.push({ name, url });
-
-    // Clear the form inputs
-    form.reset();
-
-    // Save the updated list and re-display
-    saveAndRender();
-});
-
-// Initial rendering when the page first loads
-renderShortcuts();
-
-// Get the toggle button and form container
 const toggleFormBtn = document.getElementById('toggleFormBtn');
 const formContainer = document.getElementById('formContainer');
+const parentFolderSelect = document.getElementById('parentFolder');
+const folderParentSelect = document.getElementById('folderParent');
 
-// Toggle form visibility when '+' is clicked
-toggleFormBtn.addEventListener('click', () => {
-    if (formContainer.style.display === 'none') {
-        formContainer.style.display = 'block';
-        toggleFormBtn.textContent = '−'; // Change to minus when open
-    } else {
-        formContainer.style.display = 'none';
-        toggleFormBtn.textContent = '＋'; // Back to plus when closed
+// Load saved shortcuts from localStorage, or start with an empty list
+let shortcuts = JSON.parse(localStorage.getItem('shortcuts') || '[]');
+
+// If the data is in old format (just a flat list of shortcuts), convert it
+if (shortcuts.length && !shortcuts[0].hasOwnProperty('children')) {
+  shortcuts = [{ name: 'Root', children: shortcuts }];
+}
+
+// Save shortcuts to localStorage
+function saveShortcuts() {
+  localStorage.setItem('shortcuts', JSON.stringify(shortcuts));
+}
+
+// Recursively find a folder by its path (e.g., ["Work", "Projects"])
+function findFolder(pathArray, current = shortcuts) {
+  if (!pathArray.length) return { children: current }; // Base case: return current level if path is empty
+  const name = pathArray[0]; // Take the first folder name in the path
+  const next = current.find(item => item.name === name && item.children); // Find folder with that name
+  return next ? findFolder(pathArray.slice(1), next.children) : null;
+}
+
+// Render the entire shortcuts/folder structure on the page
+function renderShortcuts(data = shortcuts, container = shortcutsDiv, path = []) {
+  container.innerHTML = ''; // Clear existing display
+
+  data.forEach((item, index) => {
+    const wrapper = document.createElement('div'); // Container for each item
+    wrapper.style.marginLeft = '20px'; // Indent for subfolders
+
+    const header = document.createElement('div'); // Row for name + buttons
+    header.style.display = 'flex';
+    header.style.alignItems = 'center';
+    header.style.gap = '10px';
+
+    // Delete button for both folders and shortcuts
+    const delBtn = document.createElement('button');
+    delBtn.textContent = '❌';
+    delBtn.onclick = () => {
+      data.splice(index, 1); // Remove from the parent array
+      saveShortcuts();
+      renderShortcuts();
+      updateFolderDropdowns();
+    };
+
+    // If it's a folder
+    if (item.children) {
+      const toggleBtn = document.createElement('button');
+      toggleBtn.textContent = '▶'; // Arrow to indicate collapsed folder
+      toggleBtn.style.cursor = 'pointer';
+
+      const label = document.createElement('strong');
+      label.textContent = item.name;
+
+      const subContainer = document.createElement('div');
+      subContainer.style.display = 'none'; // Initially hidden
+
+      // Toggle collapse/expand when arrow is clicked
+      toggleBtn.onclick = () => {
+        const isExpanded = subContainer.style.display === 'block';
+        subContainer.style.display = isExpanded ? 'none' : 'block';
+        toggleBtn.textContent = isExpanded ? '▶' : '▼';
+      };
+
+      header.append(toggleBtn, label, delBtn); // Folder row
+      wrapper.appendChild(header);
+      wrapper.appendChild(subContainer);
+
+      // Recursively render folder contents
+      renderShortcuts(item.children, subContainer, [...path, item.name]);
     }
+
+    // If it's a shortcut
+    else {
+      const a = document.createElement('a');
+      a.href = item.url;
+      a.textContent = item.name;
+      a.target = '_blank'; // Open in new tab
+
+      header.appendChild(a);
+      header.appendChild(delBtn);
+      wrapper.appendChild(header);
+    }
+
+    container.appendChild(wrapper); // Add to the main view
+  });
+}
+
+// Update dropdowns for choosing folder paths in the form
+function updateFolderDropdowns() {
+  const paths = [];
+
+  // Recursively collect all folder paths
+  function traverse(data, path = []) {
+    data.forEach(item => {
+      if (item.children) {
+        const newPath = [...path, item.name]; // Keep track of the path
+        paths.push(newPath); // Add the folder path to list
+        traverse(item.children, newPath); // Recurse into subfolders
+      }
+    });
+  }
+
+  traverse(shortcuts); // Start collecting from root
+
+  // Helper to populate both dropdowns (for folders and shortcuts)
+  function populate(selectElement) {
+    selectElement.innerHTML = `<option value="">(Root)</option>`;
+    paths.forEach(path => {
+      const value = path.join('/');
+      const label = path.join(' / ');
+      const option = new Option(label, value);
+      selectElement.appendChild(option);
+    });
+  }
+
+  populate(parentFolderSelect);
+  populate(folderParentSelect);
+}
+
+// Handle shortcut creation
+shortcutForm.addEventListener('submit', e => {
+  e.preventDefault(); // Prevent form from refreshing the page
+
+  const name = document.getElementById('name').value;
+  const url = document.getElementById('url').value;
+  const path = parentFolderSelect.value ? parentFolderSelect.value.split('/') : [];
+
+  const folder = findFolder(path);
+  if (folder) {
+    folder.children.push({ name, url }); // Add shortcut to the folder
+    saveShortcuts();
+    renderShortcuts();
+    shortcutForm.reset();
+  }
 });
+
+// Handle folder creation
+folderForm.addEventListener('submit', e => {
+  e.preventDefault();
+
+  const name = document.getElementById('folderName').value;
+  const path = folderParentSelect.value ? folderParentSelect.value.split('/') : [];
+
+  const folder = findFolder(path);
+  if (folder) {
+    folder.children.push({ name, children: [] }); // Add a new empty folder
+    saveShortcuts();
+    renderShortcuts();
+    folderForm.reset();
+    updateFolderDropdowns(); // Refresh dropdowns
+  }
+});
+
+// Show/hide the form section when "+" is clicked
+toggleFormBtn.addEventListener('click', () => {
+  const isVisible = formContainer.style.display === 'block';
+  formContainer.style.display = isVisible ? 'none' : 'block';
+  toggleFormBtn.textContent = isVisible ? '＋' : '−';
+});
+
+// Run on first page load
+renderShortcuts();
+updateFolderDropdowns();

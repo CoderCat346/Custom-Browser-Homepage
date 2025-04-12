@@ -27,19 +27,43 @@
             <main>
                 <div>
                     <h2>My Shortcuts</h2>
-                    <div id="shortcuts"></div> <br>
 
-                    <!-- Add Shortcut Toggle -->
+                    <!-- Where all folders and shortcuts will be displayed -->
+                    <div id="shortcuts"></div><br>
+
+                    <!-- Button to toggle the visibility of the form section -->
                     <button id="toggleFormBtn">＋</button>
 
-                    <!-- Hidden Form Initially -->
+                    <!-- The container for the two forms: Add Shortcut and Add Folder -->
                     <div id="formContainer" style="display: none; margin-top: 10px;">
-                        <h3>Add Shortcut</h3>
-                        <form id="shortcutForm">
-                            <input type="text" id="name" placeholder="Name" required>
-                            <input type="url" id="url" placeholder="https://example.com" required>
-                            <button type="submit">Add</button>
-                        </form>
+
+                    <h3>Add Shortcut or Folder</h3>
+
+                    <!-- Form to add a new shortcut (name + URL) -->
+                    <form id="shortcutForm">
+                        <!-- Input for shortcut name -->
+                        <input type="text" id="name" placeholder="Shortcut Name" required>
+                        <!-- Input for shortcut URL -->
+                        <input type="url" id="url" placeholder="https://example.com" required>
+                        <!-- Dropdown to choose which folder to add the shortcut into -->
+                        <select id="parentFolder">
+                        <option value="">(Root)</option>
+                        </select>
+                        <!-- Submit button -->
+                        <button type="submit">Add Shortcut</button>
+                    </form>
+
+                    <!-- Separate form to add a new folder -->
+                    <form id="folderForm" style="margin-top: 10px;">
+                        <!-- Input for folder name -->
+                        <input type="text" id="folderName" placeholder="Folder Name" required>
+                        <!-- Dropdown to choose the parent folder for this new folder -->
+                        <select id="folderParent">
+                        <option value="">(Root)</option>
+                        </select>
+                        <!-- Submit button -->
+                        <button type="submit">Add Folder</button>
+                    </form>
                     </div>
 
                 </div>
