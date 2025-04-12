@@ -46,9 +46,9 @@ function renderShortcuts(data = shortcuts, container = shortcutsDiv, path = []) 
     delBtn.textContent = '❌';
     delBtn.onclick = () => {
       data.splice(index, 1); // Remove from the parent array
-      saveShortcuts();
-      renderShortcuts();
-      updateFolderDropdowns();
+      saveShortcuts();       // Persist the change
+      renderShortcuts();     // Re-render the UI
+      updateFolderDropdowns(); // Update dropdowns in case folders changed
     };
 
     // If it's a folder
@@ -85,8 +85,27 @@ function renderShortcuts(data = shortcuts, container = shortcutsDiv, path = []) 
       a.textContent = item.name;
       a.target = '_blank'; // Open in new tab
 
-      header.appendChild(a);
-      header.appendChild(delBtn);
+      // 🟡 New: Create favicon image using DuckDuckGo API
+      // Extract the domain from the URL
+      const domain = new URL(item.url).hostname;
+
+      // Build favicon URL using DDG favicon API
+      const faviconUrl = `https://icons.duckduckgo.com/ip3/${domain}.ico`;
+
+      // Create an <img> element for the favicon
+      const favicon = document.createElement('img');
+      favicon.src = faviconUrl;
+      favicon.width = 16;
+      favicon.height = 16;
+      favicon.style.marginRight = '5px';
+
+      // Optional: fallback in case favicon is not found
+      favicon.onerror = () => {
+        favicon.src = 'default-icon.png'; // Replace with your fallback icon path
+      };
+
+      // Assemble shortcut row: [favicon] [link] [delete button]
+      header.append(favicon, a, delBtn);
       wrapper.appendChild(header);
     }
 
