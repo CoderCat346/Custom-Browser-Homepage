@@ -27,7 +27,7 @@
             <main>
 
                 <div>
-                    <h2>Search the Web</h2>
+                    <h2>Private Web Search</h2>
 
                     <!-- Search form with dropdown and input field -->
                     <form id="search-form">
@@ -39,11 +39,17 @@
                         </select>
                         
                         <!-- Input field for entering search query -->
-                        <input type="text" id="search-input" placeholder="Search..." />
+                        <input type="text" id="search-input" placeholder="Search..."  />
                         
+                        <!-- Radio buttons for open mode -->
+                        <div>
+                            <label><input type="radio" name="tab-mode" value="same" checked> Same Tab</label>
+                            <label><input type="radio" name="tab-mode" value="new"> New Tab</label>
+                        </div>
+
                         <!-- Submit button to trigger the search -->
                         <button type="submit">Search</button>
-                    </form>                                    
+                    </form>                                     
                 </div>
 
                 <div>
