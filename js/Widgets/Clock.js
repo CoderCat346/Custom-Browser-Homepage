@@ -15,20 +15,25 @@ function updateClock() {
     const minutesFormatted = minutes < 10 ? '0' + minutes : minutes;
     const secondsFormatted = seconds < 10 ? '0' + seconds : seconds;
 
-    // Assemble time string
+    // Format time string
     const timeString = `${hours}:${minutesFormatted}:${secondsFormatted} ${period}`;
 
-    // Update the clock element
+    // Format date string
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const dateString = now.toLocaleDateString(undefined, options);
+
+    // Update the clock and date elements
     document.getElementById('clock-widget').textContent = timeString;
+    document.getElementById('date-widget').textContent = dateString;
 }
 
-// Update the clock every second
+// Update every second
 setInterval(updateClock, 1000);
 
-// Initialize the clock
+// Initialize immediately
 updateClock();
 
-
 export function initClock() {
-    console.log("Clock ready") ;
-  }
+    console.log("Clock ready");
+}
+
