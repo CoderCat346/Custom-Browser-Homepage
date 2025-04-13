@@ -18,89 +18,109 @@
         <!-- <SEMANTIC> -->
             <header></header>
 
-
-
-
-
-
-
             <main>
+                <!-- Two-column layout starts here -->
+                <div class="columns">
 
-                <div>
-                    <h2>Private Web Search</h2>
-
-                    <!-- Search form with dropdown and input field -->
-                    <form id="search-form">
-                        <!-- Dropdown for selecting search engine -->
-                        <select id="search-engine">
-                        <option value="ddg">DuckDuckGo</option>
-                        <option value="brave">Brave Search</option>
-                        <option value="startpage">Startpage</option>
-                        </select>
+                    <!-- LEFT COLUMN: Essentials -->
+                    <section class="left-column">
                         
-                        <!-- Input field for entering search query -->
-                        <input type="text" id="search-input" placeholder="Search..."  />
+                        <!-- <SEARCH> -->
+                            <section aria-labelledby="search-heading">
+                                <h2 id="search-heading">Private Web Search</h2>
+
+                                <!-- Search form with dropdown and input field -->
+                                <form id="search-form">
+                                    <!-- Dropdown for selecting search engine -->
+                                    <select id="search-engine">
+                                        <option value="ddg">DuckDuckGo</option>
+                                        <option value="brave">Brave Search</option>
+                                        <option value="startpage">Startpage</option>
+                                    </select>
+                                    
+                                    <!-- Input field for entering search query -->
+                                    <input type="text" id="search-input" placeholder="Search..."  />
+                                    
+                                    <!-- Radio buttons for open mode -->
+                                    <div>
+                                        <label><input type="radio" name="tab-mode" value="same" checked> Same Tab</label>
+                                        <label><input type="radio" name="tab-mode" value="new"> New Tab</label>
+                                    </div>
+
+                                    <!-- Submit button to trigger the search -->
+                                    <button type="submit">Search</button>
+                                </form>
+                            </section>
+                        <!-- </SEARCH> -->
+
+                        <!-- <SHORTCUTS> -->
+                            <section aria-labelledby="shortcuts-heading">
+                                <h2 id="shortcuts-heading">My Shortcuts</h2>
+
+                                <!-- Where all folders and shortcuts will be displayed -->
+                                <div id="shortcuts"></div><br>
+
+                                <!-- Button to toggle the visibility of the form section -->
+                                <button id="toggleFormBtn">＋</button>
+
+                                <!-- The container for the two forms: Add Shortcut and Add Folder -->
+                                <div id="formContainer" style="display: none; margin-top: 10px;">
+                                    
+                                    <h3>Add Shortcut or Folder</h3>
+
+                                    <!-- Form to add a new shortcut (name + URL) -->
+                                    <form id="shortcutForm">
+                                        <!-- Input for shortcut name -->
+                                        <input type="text" id="name" placeholder="Shortcut Name" required>
+                                        <!-- Input for shortcut URL -->
+                                        <input type="url" id="url" placeholder="https://example.com" required>
+                                        <!-- Dropdown to choose which folder to add the shortcut into -->
+                                        <select id="parentFolder">
+                                            <option value="">(Root)</option>
+                                        </select>
+                                        <!-- Submit button -->
+                                        <button type="submit">Add Shortcut</button>
+                                    </form>
+
+                                    <!-- Separate form to add a new folder -->
+                                    <form id="folderForm" style="margin-top: 10px;">
+                                        <!-- Input for folder name -->
+                                        <input type="text" id="folderName" placeholder="Folder Name" required>
+                                        <!-- Dropdown to choose the parent folder for this new folder -->
+                                        <select id="folderParent">
+                                            <option value="">(Root)</option>
+                                        </select>
+                                        <!-- Submit button -->
+                                        <button type="submit">Add Folder</button>
+                                    </form>
+                                </div>
+                            </section>
+                        <!-- </SHORTCUTS> -->
+
+                    </section>
+
+                    <!-- RIGHT COLUMN: Widgets -->
+                    <section class="right-column">
                         
-                        <!-- Radio buttons for open mode -->
-                        <div>
-                            <label><input type="radio" name="tab-mode" value="same" checked> Same Tab</label>
-                            <label><input type="radio" name="tab-mode" value="new"> New Tab</label>
-                        </div>
+                        <!-- <CLOCK WIDGET> -->
+                            <section aria-labelledby="clock-heading">
+                                <h2 id="clock-heading">Clock</h2>
+                                <!-- Insert your clock widget here -->
+                                <div id="clock-widget"></div>
+                            </section>
+                        <!-- </CLOCK WIDGET> -->
 
-                        <!-- Submit button to trigger the search -->
-                        <button type="submit">Search</button>
-                    </form>                                     
+                        <!-- <NERD STATS> -->
+                            <section aria-labelledby="stats-heading">
+                                <h2 id="stats-heading">Stats for Nerds</h2>
+                                <!-- Insert your stats widget here -->
+                                <div id="nerd-stats"></div>
+                            </section>
+                        <!-- </NERD STATS> -->
+
+                    </section>
                 </div>
-
-                <div>
-                    <h2>My Shortcuts</h2>
-
-                    <!-- Where all folders and shortcuts will be displayed -->
-                    <div id="shortcuts"></div><br>
-
-                    <!-- Button to toggle the visibility of the form section -->
-                    <button id="toggleFormBtn">＋</button>
-
-                    <!-- The container for the two forms: Add Shortcut and Add Folder -->
-                    <div id="formContainer" style="display: none; margin-top: 10px;">
-
-                    <h3>Add Shortcut or Folder</h3>
-
-                    <!-- Form to add a new shortcut (name + URL) -->
-                    <form id="shortcutForm">
-                        <!-- Input for shortcut name -->
-                        <input type="text" id="name" placeholder="Shortcut Name" required>
-                        <!-- Input for shortcut URL -->
-                        <input type="url" id="url" placeholder="https://example.com" required>
-                        <!-- Dropdown to choose which folder to add the shortcut into -->
-                        <select id="parentFolder">
-                        <option value="">(Root)</option>
-                        </select>
-                        <!-- Submit button -->
-                        <button type="submit">Add Shortcut</button>
-                    </form>
-
-                    <!-- Separate form to add a new folder -->
-                    <form id="folderForm" style="margin-top: 10px;">
-                        <!-- Input for folder name -->
-                        <input type="text" id="folderName" placeholder="Folder Name" required>
-                        <!-- Dropdown to choose the parent folder for this new folder -->
-                        <select id="folderParent">
-                        <option value="">(Root)</option>
-                        </select>
-                        <!-- Submit button -->
-                        <button type="submit">Add Folder</button>
-                    </form>
-                    </div>
-
-                </div>
-
             </main>
-
-
-
-
-
 
             <footer></footer>
         <!-- </SEMANTIC> -->
