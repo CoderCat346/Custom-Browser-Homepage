@@ -112,7 +112,7 @@
                         <!-- </CLOCK WIDGET> -->
 
                         <!-- <QURAN WIDGET> -->
-                            <section aria-labelledby="Quran Heading">
+                            <section aria-labelledby="Quran-Heading">
                                 <!-- Quran Widget -->
                                 <div id="quran-widget">
                                     <h3>Qur'anic Ayah of the Day</h3>
@@ -123,9 +123,33 @@
                             </section>
                         <!-- </QURAN WIDGET> -->
 
+                        <!-- <WEATHER WIDGET> -->
+                            <section aria-labelledby="weather-heading">
+                                <h1>🌤️ My Weather Widgets</h1>
+
+                                <!-- Widget container that always stays visible -->
+                                <div id="widgetContainer"></div>
+
+                                <!-- Toggle button to show/hide the widget creator interface -->
+                                <button id="toggleBtn">Show Widget Creator</button>
+
+                                <!-- Widget creator interface (toggleable) -->
+                                <div id="widgetCreator" style="display: none;">
+                                    <div class="widget-actions">
+                                        <button onclick="window.open('https://www.aqi.in/aqi-widget', '_blank')">Create Widget on AQI.in</button>
+                                    </div>
+
+                                    <label for="widgetInput"><strong>Paste your AQI widget code here:</strong></label><br>
+                                    <textarea id="widgetInput" placeholder="Paste widget code from aqi.in..."></textarea><br>
+                                    <button id="saveBtn">Add Widget</button>
+                                </div>
+
+                            </section>
+                        <!-- </WEATHER WIDGET> -->
+
                         <!-- <NEW WIDGET TEMPLATE> -->
                             <section aria-labelledby="">
-                                <h2 id="">New Widegt</h2>
+                                <h2 id="">New Widget</h2>
                                 <!-- Insert your new widget here -->
                                 <div id=""></div>
                             </section>
