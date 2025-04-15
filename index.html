@@ -18,7 +18,25 @@
         <!-- <SEMANTIC> -->
             <header></header>
 
-            <main>
+            <main class="layout">
+
+                <!-- TOP BAR -->
+                <div class="top-bar">
+                    <button class="settings-btn" onclick="toggleSidebar()">⚙️</button>
+                </div>
+            
+                <!-- SIDEBAR (fixed to screen) -->
+                <aside class="sidebar" id="sidebar">
+                    <button class="close-btn" onclick="toggleSidebar()">×</button>
+                    <h2>Settings</h2>
+                    
+                    <div class="widget-toggle-section">
+                        <h3>Toggle Widgets</h3>
+                        <div id="widget-toggle-container"></div>
+                      </div>                      
+                </aside>
+
+                <!-- MAIN CONTENT AREA -->
                 <!-- Two-column layout starts here -->
                 <div class="columns">
 
@@ -103,7 +121,7 @@
                     <section class="right-column">
                         
                         <!-- <CLOCK WIDGET> -->
-                            <section aria-labelledby="clock-heading">
+                            <section id="clock-widget-wrapper">
                                 <h2 id="clock-heading">Clock</h2>
                                 <!-- Insert your clock widget here -->
                                 <div id="clock-widget"></div>
@@ -112,8 +130,8 @@
                         <!-- </CLOCK WIDGET> -->
 
                         <!-- <QURAN WIDGET> -->
-                            <section aria-labelledby="Quran-Heading">
-                                <div id="quran-widget">
+                            <section id="Quran-widget-wrapper">
+                                <div id="Quran-widget">
                                     <h2>Qur'anic Ayah of the Day</h2>
                                     <p id="ayah-arabic" style="font-size: 1.5em;"></p>
                                     <p id="ayah-translation"></p>
@@ -123,7 +141,7 @@
                         <!-- </QURAN WIDGET> -->
 
                         <!-- <WEATHER WIDGET> -->
-                            <section aria-labelledby="weather-heading">
+                            <section id="weather-widget-wrapper">
                                 <h2>🌤️ My Weather Widgets</h2>
 
                                 <!-- Widget container that always stays visible -->
@@ -147,21 +165,21 @@
                         <!-- </WEATHER WIDGET> -->
 
                         <!-- <NEWS WIDGET> -->
-                            <section aria-labelledby="news-heading">
+                            <section id="news-widget-wrapper">
                                 <h2>Latest News</h2>
                                 <div id="news-widget">Loading news...</div>
                             </section>
                         <!-- </NEWS WIDGET> -->
 
                         <!-- <PROTON SUITE WIDGET> -->
-                            <section aria-labelledby="proton-heading">
+                            <section id="proton-apps-wrapper">
                                 <h2 id="">Proton Suite</h2>
                                 <div class="app-grid" id="proton-apps"></div>
                             </section>
                         <!-- </PROTON SUITE WIDGET> -->
 
                         <!-- <NOTES WIDGET> -->
-                            <section aria-labelledby="notes-heading">
+                            <section id="notes-area-wrapper">
                                 <h2 id="">My Notes</h2>
                                 <textarea id="notes-area" placeholder="Start typing..."></textarea>
                             </section>

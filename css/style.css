@@ -1,64 +1,171 @@
+/* ========================================
+  🧱 GLOBAL RESETS & BASE
+======================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f9f9f9;
+  min-height: 100vh;
+}
+
+
+/* ========================================
+  🧭 MAIN LAYOUT STRUCTURE
+======================================== */
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ---------- TOP BAR ---------- */
+.top-bar {
+  height: 60px;
+  background: #eee;
+  border-bottom: 1px solid #ccc;
+  position: relative;
+  z-index: 2;
+}
+
+/* ---------- TWO COLUMN CONTENT ---------- */
 .columns {
-    display: flex;
-    flex-wrap: wrap;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 1rem;
-    gap: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+  gap: 2rem;
+  flex: 1;
 }
 
 .left-column,
 .right-column {
-    flex: 1;
-    min-width: 300px;
+  flex: 1;
+  min-width: 300px;
 }
 
+
+/* ========================================
+  ⚙️ SIDEBAR & SETTINGS
+======================================== */
+
+/* ---------- Settings Button ---------- */
+.settings-btn {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  font-size: 24px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #333;
+  z-index: 3;
+}
+
+/* ---------- Slide-In Sidebar ---------- */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -300px;
+  width: 300px;
+  height: 100%;
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  transition: right 0.3s ease;
+  z-index: 100;
+}
+
+.sidebar.open {
+  right: 0;
+}
+
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 30px;
+  background-color: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+
+/* ========================================
+  🧩 COMPONENT STYLES
+======================================== */
+
+/* ---------- Right Column Widgets ---------- */
 .right-column {
-    column-count: 2;
-    column-gap: 20px;
+  column-count: 2;
+  column-gap: 20px;
 }
 
 .right-column section {
-    break-inside: avoid;
-    margin-bottom: 20px;
-    background: #f8f8f8;
-    padding: 10px;
-    border-radius: 10px;
+  break-inside: avoid;
+  margin-bottom: 20px;
+  background: #f8f8f8;
+  padding: 10px;
+  border-radius: 10px;
 }
 
-body {
-    font-family: sans-serif;
-    display: flex;
-    justify-content: center;
-    padding: 40px;
-    background: #f9f9f9;
-  }
-  
-  .app-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-    gap: 20px;
-    max-width: 400px;
-    width: 100%;
-    text-align: center;
-  }
-  
-  .app-grid a {
-    text-decoration: none;
-    color: #222;
-    transition: transform 0.2s;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .app-grid a:hover {
-    transform: scale(1.1);
-  }
-  
-  .app-grid img {
-    width: 32px;
-    height: 32px;
-    margin-bottom: 8px;
-  }
-  
+.right-column section {
+  break-inside: avoid;
+  margin-bottom: 20px;
+  background: #fff;
+  padding: 12px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.right-column section:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+
+/* ---------- App Grid (Proton Suite, etc.) ---------- */
+.app-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 20px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+.app-grid a {
+  text-decoration: none;
+  color: #222;
+  transition: transform 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.app-grid a:hover {
+  transform: scale(1.1);
+}
+
+.app-grid img {
+  width: 32px;
+  height: 32px;
+  margin-bottom: 8px;
+}
+
+
+/* ========================================
+  📦 UTILITIES / MISC
+======================================== */
+
+/* Add reusable classes and utilities here if needed */
