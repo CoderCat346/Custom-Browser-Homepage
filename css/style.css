@@ -12,3 +12,16 @@
     flex: 1;
     min-width: 300px;
 }
+
+.right-column {
+    column-count: 2;
+    column-gap: 20px;
+}
+
+.right-column section {
+    break-inside: avoid;
+    margin-bottom: 20px;
+    background: #f8f8f8;
+    padding: 10px;
+    border-radius: 10px;
+}
