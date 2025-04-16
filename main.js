@@ -8,7 +8,9 @@ import { initNews } from "/js/Widgets/News.js";
 import { initNotes } from "/js/Widgets/Notes.js";
 import { initProtonSuite } from "/js/Widgets/ProtonSuite.js";
 
-import { initSidebar } from "/js/sidebar.js";
+import { initBar_toggle } from "/js/Sidebar/BarToggle.js";
+import { initWidget_toggle } from "/js/Sidebar/WidgetToggle.js";
+import { initBackground } from "/js/Sidebar/Background.js";
 
 initSearchBar() ;
 initShortcuts() ;
@@ -20,4 +22,7 @@ initNews () ;
 initNotes () ;
 initProtonSuite () ;
 
-initSidebar () ;
+initBar_toggle () ;
+initWidget_toggle () ;
+initBackground () ;
+

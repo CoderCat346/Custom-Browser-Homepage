@@ -29,11 +29,33 @@
                 <aside class="sidebar" id="sidebar">
                     <button class="close-btn" onclick="toggleSidebar()">×</button>
                     <h2>Settings</h2>
+
+                    <br>
                     
                     <div class="widget-toggle-section">
                         <h3>Toggle Widgets</h3>
                         <div id="widget-toggle-container"></div>
-                      </div>                      
+                    </div>
+
+                    <br>
+                    
+                    <!-- BACKGROUND SETTINGS SECTION (empty container) -->
+                    <div>
+                        <h3>Change Background</h3>
+                        <div>
+                          <label>
+                            <input type="radio" name="bgType" value="color" checked onchange="renderOptions(this.value)">
+                            Background Color
+                          </label>
+                          <br>
+                          <label>
+                            <input type="radio" name="bgType" value="image" onchange="renderOptions(this.value)">
+                            Background Image
+                          </label>
+                        </div>
+                      
+                        <div id="optionsContainer"></div>
+                    </div>
                 </aside>
 
                 <!-- MAIN CONTENT AREA -->
