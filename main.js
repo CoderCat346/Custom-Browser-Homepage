@@ -11,6 +11,7 @@ import { initProtonSuite } from "/js/Widgets/ProtonSuite.js";
 import { initBar_toggle } from "/js/Sidebar/BarToggle.js";
 import { initWidget_toggle } from "/js/Sidebar/WidgetToggle.js";
 import { initBackground } from "/js/Sidebar/Background.js";
+import { initThemes } from "/js/Sidebar/Themes.js";
 
 initSearchBar() ;
 initShortcuts() ;
@@ -25,4 +26,5 @@ initProtonSuite () ;
 initBar_toggle () ;
 initWidget_toggle () ;
 initBackground () ;
+initThemes () ;
 

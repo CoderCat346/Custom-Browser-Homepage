@@ -24,8 +24,6 @@
 
   .top-bar {
     height: 35px;
-    background: #eee;
-    border-bottom: 1px solid #ccc;
     position: relative;
     z-index: 2;
   }
