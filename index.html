@@ -11,8 +11,7 @@
 
         <title>Homepage</title>
 
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="preload" as="style">
+        <link rel="stylesheet" href="css/style.css" rel="preload" as="style">
 
     </head>
     <body>
@@ -20,7 +19,7 @@
 
                 <!-- TOP BAR -->
                 <div class="top-bar">
-                    <button class="settings-btn" onclick="toggleSidebar()">⚙️</button>
+                    <button class="settings-btn" onclick="toggleSidebar()">⚙️ Settings</button>
                 </div>
             
                 <!-- SIDEBAR (fixed to screen) -->
@@ -68,7 +67,7 @@
                                 <h2 id="search-heading">Private Web Search</h2>
 
                                 <!-- Search form with dropdown and input field -->
-                                <form id="search-form">
+                                <form id="search-form" autocomplete="off" >
                                     <!-- Dropdown for selecting search engine -->
                                     <select id="search-engine">
                                         <option value="ddg">DuckDuckGo</option>
@@ -107,7 +106,7 @@
                                     <h3>Add Shortcut or Folder</h3>
 
                                     <!-- Form to add a new shortcut (name + URL) -->
-                                    <form id="shortcutForm">
+                                    <form id="shortcutForm" autocomplete="off">
                                         <!-- Input for shortcut name -->
                                         <input type="text" id="name" placeholder="Shortcut Name" required>
                                         <!-- Input for shortcut URL -->
@@ -121,7 +120,7 @@
                                     </form>
 
                                     <!-- Separate form to add a new folder -->
-                                    <form id="folderForm" style="margin-top: 10px;">
+                                    <form id="folderForm" style="margin-top: 10px;" autocomplete="off">
                                         <!-- Input for folder name -->
                                         <input type="text" id="folderName" placeholder="Folder Name" required>
                                         <!-- Dropdown to choose the parent folder for this new folder -->
