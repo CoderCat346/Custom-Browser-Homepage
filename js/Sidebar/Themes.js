@@ -2,7 +2,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // Define the themes with their labels
     const themes = [
         { file: 'material-light.css', label: 'Material Light' },
-        { file: 'material-dark.css', label: 'Material Dark' }
+        { file: 'material-dark.css', label: 'Material Dark' } ,
+        { file: 'whimsical.css', label: 'Whimsical' } ,
     ];
 
     const themeLink = document.getElementById('theme-link');

@@ -1,0 +1,148 @@
+/* whimsical.css - Enhanced for vibrance, visibility, and delight */
+
+:root {
+    --whim-bg: #fdf9ff;
+    --whim-accent: #be7ad9;
+    --whim-highlight: #ffe6ff;
+    --whim-text: #3e2e47;
+    --whim-card: rgba(255, 255, 255, 0.7);
+    --whim-border: #e5cfff;
+    --whim-shadow: 0 8px 24px rgba(190, 122, 217, 0.3);
+  }
+  
+  /* Background & Typography */
+  body {
+    background: radial-gradient(circle at top left, #fff0f8, #f7eaff);
+    color: var(--whim-text);
+    font-family: "Comic Neue", cursive, sans-serif;
+  }
+  
+  /* Top Bar Button */
+  .settings-btn {
+    color: var(--whim-accent);
+  }
+  
+  /* Sidebar */
+  .sidebar {
+    background-color: var(--whim-accent);
+    color: #fff;
+  }
+  
+  /* Common Card Style */
+  .right-column section,
+  .left-column section {
+    background: var(--whim-card);
+    border: 1px solid var(--whim-border);
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: var(--whim-shadow);
+    backdrop-filter: blur(8px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .right-column section:hover,
+  .left-column section:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(190, 122, 217, 0.4);
+  }
+  
+  /* Notes Area */
+  #notes-area-wrapper {
+    background: rgba(255, 255, 255, 0.55);
+    border-radius: 16px;
+    border: 1px solid var(--whim-border);
+    padding: 1rem;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 16px rgba(190, 122, 217, 0.25);
+  }
+  
+  #notes-area {
+    width: 100%;
+    min-height: 150px;
+    border: none;
+    border-radius: 12px;
+    padding: 12px;
+    font-family: "Comic Neue", cursive;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.1);
+    color: #3e2e47;
+  }
+  
+  /* Form Elements */
+  input, select, textarea, button {
+    border-radius: 10px;
+    border: 1px solid var(--whim-border);
+    padding: 6px 10px;
+    background-color: #ffffffdd;
+    font-family: inherit;
+  }
+  
+  button {
+    background-color: var(--whim-accent);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #a660c5;
+  }
+  
+  /* Accent Headings */
+  h2, h3 {
+    color: var(--whim-accent);
+    font-weight: bold;
+  }
+  
+  /* Sparkle Animation */
+  @keyframes sparklePulse {
+    0% { opacity: 0.2; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.1); }
+    100% { opacity: 0.2; transform: scale(1); }
+  }
+  
+  body::after {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image: radial-gradient(circle, #ffe6ff 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    animation: sparklePulse 5s infinite ease-in-out;
+    z-index: -1;
+    opacity: 0.3;
+  }
+
+  /* Sidebar improvements */
+.sidebar {
+    background-color: var(--whim-accent);
+    color: #fff;
+    padding: 20px;
+  }
+  
+  /* Sidebar Headings */
+  .sidebar h2, .sidebar h3 {
+    color: white; /* Ensure they are visible */
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2); /* Subtle shadow for legibility */
+  }
+  
+  /* Sidebar Option Text */
+  .sidebar label {
+    font-size: 1.1rem;
+    color: #fff;
+    display: inline-block;
+    margin: 8px 0;
+  }
+  
+  /* Sidebar active option highlight */
+  .sidebar input[type="radio"]:checked + label {
+    background-color: var(--whim-highlight);
+    border-radius: 6px;
+    padding: 4px 8px;
+    color: var(--whim-text); /* Change label color when checked */
+  }
+  
