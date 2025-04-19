@@ -17,8 +17,6 @@ const imageOptions = [
   { label: 'City', url: '/assets/images/City.webp' } ,
   { label: 'Architecture', url: '/assets/images/Architecture.webp' } ,
   { label: 'Waves', url: '/assets/images/Waves.webp' } ,
-  { label: 'Glass', url: '/assets/images/Glass.webp' } ,
-  { label: 'Stars', url: '/assets/images/Stars.webp' } ,
 ];
   
 // Function to render the options dynamically
