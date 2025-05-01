@@ -1,216 +1,205 @@
+<!-- Clone the full boilerplate code from GitHub (for developers) -->
 <!-- git clone https://github.com/CoderCat346/HTML-Boilerplate -->
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <!-- <META> -->
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <meta name="referrer" content="no-referrer">
-            <!-- Changed meta tags due to privacy concerns -->
-        <!-- </META> -->
 
-        <title>Homepage</title>
+<!DOCTYPE html> <!-- Declares the document type and HTML5 standard -->
+<html lang="en"> <!-- Sets the primary language to English -->
 
-        <link rel="stylesheet" href="/css/style.css" rel="preload" as="style">
-        <link id="theme-link" rel="stylesheet" href="">
-        
+<head>
+    <!-- META TAGS SECTION -->
+    <meta charset="UTF-8"> <!-- Defines the character encoding to UTF-8 (universal web character set) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Enables responsive design on mobile by setting viewport scaling -->
+    <meta name="referrer" content="no-referrer"> <!-- Prevents the browser from sending the referrer header (enhances privacy) -->
 
-    </head>
-    <body>
-        <main class="layout">
+    <!-- PAGE TITLE -->
+    <title>Homepage</title> <!-- This is what appears in the browser tab -->
 
-                <!-- TOP BAR -->
-                <div class="top-bar">
-                    <button class="settings-btn" onclick="toggleSidebar()">⚙️ Settings</button>
-                </div>
-            
-                <!-- SIDEBAR (fixed to screen) -->
-                <aside class="sidebar" id="sidebar">
-                    <button class="close-btn" onclick="toggleSidebar()">×</button>
-                    <h2>Settings</h2>
+    <!-- STYLESHEETS -->
+    <link rel="stylesheet" href="/css/style.css" rel="preload" as="style"> <!-- Links external CSS for styling the page -->
+    <link id="theme-link" rel="stylesheet" href=""> <!-- Placeholder for dynamically changing themes via JS -->
+</head>
 
-                    <br>
-                    
-                    <div class="widget-toggle-section">
-                        <h3>Toggle Widgets</h3>
-                        <div id="widget-toggle-container"></div>
-                    </div>
+<body>
+    <!-- MAIN CONTAINER (holds the entire layout) -->
+    <main class="layout">
 
-                    <br>
-                    
-                    <!-- BACKGROUND SETTINGS SECTION (empty container) -->
-                    <div>
-                        <h3>Change Background</h3>
-                        <div>
-                          <label>
-                            <input type="radio" name="bgType" value="color" checked onchange="renderOptions(this.value)">
-                            Background Color
-                          </label>
-                          <br>
-                          <label>
-                            <input type="radio" name="bgType" value="image" onchange="renderOptions(this.value)">
-                            Background Image
-                          </label>
+        <!-- TOP BAR (Settings button only) -->
+        <div class="top-bar">
+            <button class="settings-btn" onclick="toggleSidebar()">⚙️ Settings</button>
+            <!-- Button toggles the sidebar on click -->
+        </div>
+
+        <!-- SIDEBAR FOR SETTINGS -->
+        <aside class="sidebar" id="sidebar">
+            <button class="close-btn" onclick="toggleSidebar()">×</button>
+            <!-- Closes sidebar -->
+
+            <h2>Settings</h2>
+
+            <!-- WIDGET TOGGLER -->
+            <div class="widget-toggle-section">
+                <h3>Toggle Widgets</h3>
+                <div id="widget-toggle-container"></div>
+                <!-- JavaScript will inject toggles here -->
+            </div>
+
+            <!-- BACKGROUND CHANGER SECTION -->
+            <div>
+                <h3>Change Background</h3>
+                <!-- Select between background color or image -->
+                <label>
+                    <input type="radio" name="bgType" value="color" checked onchange="renderOptions(this.value)">
+                    Background Color
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="bgType" value="image" onchange="renderOptions(this.value)">
+                    Background Image
+                </label>
+
+                <!-- Options (like color pickers or image selectors) injected here -->
+                <div id="optionsContainer"></div>
+            </div>
+
+            <!-- THEME SELECTOR -->
+            <h2>Choose a Theme</h2>
+            <div id="theme-options"></div>
+            <!-- JavaScript injects theme buttons here -->
+        </aside>
+
+        <!-- TWO-COLUMN MAIN CONTENT LAYOUT -->
+        <div class="columns">
+
+            <!-- LEFT COLUMN: Search and Shortcuts -->
+            <section class="left-column">
+
+                <!-- SEARCH SECTION -->
+                <section aria-labelledby="search-heading">
+                    <h2 id="search-heading">Private Web Search</h2>
+
+                    <form id="search-form" autocomplete="off">
+                        <!-- Dropdown to choose a private search engine -->
+                        <select id="search-engine">
+                            <option value="ddg">DuckDuckGo</option>
+                            <option value="brave">Brave Search</option>
+                            <option value="startpage">Startpage</option>
+                        </select>
+
+                        <!-- Input for user to type search terms -->
+                        <input type="text" id="search-input" placeholder="Search..." />
+
+                        <!-- Choose whether search opens in same or new tab -->
+                        <div class="radio-tab">
+                            <label><input type="radio" name="tab-mode" value="same" checked> Same Tab</label>
+                            <label><input type="radio" name="tab-mode" value="new"> New Tab</label>
                         </div>
-                      
-                        <div id="optionsContainer"></div>
+
+                        <!-- Search submit button -->
+                        <button type="submit">Search</button>
+                    </form>
+                </section>
+
+                <!-- SHORTCUTS SECTION -->
+                <section aria-labelledby="shortcuts-heading">
+                    <h2 id="shortcuts-heading">My Shortcuts</h2>
+
+                    <!-- Container for rendering shortcut folders and links -->
+                    <div id="shortcuts"></div><br>
+
+                    <!-- Toggle form visibility -->
+                    <button id="toggleFormBtn">＋</button>
+
+                    <!-- Form container (hidden by default) -->
+                    <div id="formContainer" style="display: none; margin-top: 10px;">
+                        <h3>Add Shortcut or Folder</h3>
+
+                        <!-- Add Shortcut Form -->
+                        <form id="shortcutForm" autocomplete="off">
+                            <input type="text" id="name" placeholder="Shortcut Name" required>
+                            <input type="url" id="url" placeholder="https://example.com" required>
+                            <select id="parentFolder">
+                                <option value="">(Root)</option>
+                                <!-- More options will be injected dynamically -->
+                            </select>
+                            <button type="submit">Add Shortcut</button>
+                        </form>
+
+                        <!-- Add Folder Form -->
+                        <form id="folderForm" style="margin-top: 10px;" autocomplete="off">
+                            <input type="text" id="folderName" placeholder="Folder Name" required>
+                            <select id="folderParent">
+                                <option value="">(Root)</option>
+                            </select>
+                            <button type="submit">Add Folder</button>
+                        </form>
                     </div>
+                </section>
+            </section>
 
-                    <br>
+            <!-- RIGHT COLUMN: Various Widgets -->
+            <section class="right-column">
 
-                    <h2>Choose a Theme</h2>
-                    <div id="theme-options"></div>
-                </aside>
+                <!-- CLOCK WIDGET -->
+                <section id="clock-widget-wrapper">
+                    <div id="clock-widget"></div>
+                    <div id="date-widget"></div>
+                    <!-- JS will populate with current time/date -->
+                </section>
 
-                <!-- MAIN CONTENT AREA -->
-                <!-- Two-column layout starts here -->
-                <div class="columns">
+                <!-- NOTES WIDGET -->
+                <section id="notes-area-wrapper">
+                    <h2>My Notes</h2>
+                    <textarea id="notes-area" placeholder="Start typing..."></textarea>
+                    <!-- Allows users to type quick notes -->
+                </section>
 
-                    <!-- LEFT COLUMN: Essentials -->
-                    <section class="left-column">
-                        
-                        <!-- <SEARCH> -->
-                            <section aria-labelledby="search-heading">
-                                <h2 id="search-heading">Private Web Search</h2>
+                <!-- QURAN WIDGET -->
+                <section id="Quran-widget-wrapper">
+                    <div id="Quran-widget">
+                        <p id="ayah-arabic" style="font-size: 1.5em;"></p>
+                        <p id="ayah-translation"></p>
+                        <small id="ayah-info"></small>
+                        <!-- JS dynamically fetches daily verse -->
+                    </div>
+                </section>
 
-                                <!-- Search form with dropdown and input field -->
-                                <form id="search-form" autocomplete="off" >
-                                    <!-- Dropdown for selecting search engine -->
-                                    <select id="search-engine">
-                                        <option value="ddg">DuckDuckGo</option>
-                                        <option value="brave">Brave Search</option>
-                                        <option value="startpage">Startpage</option>
-                                    </select>
-                                    
-                                    <!-- Input field for entering search query -->
-                                    <input type="text" id="search-input" placeholder="Search..."  />
-                                    
-                                    <!-- Radio buttons for open mode -->
-                                    <div class="radio-tab" >
-                                        <label><input type="radio" name="tab-mode" value="same" checked> Same Tab</label>
-                                        <label><input type="radio" name="tab-mode" value="new"> New Tab</label>
-                                    </div>
+                <!-- WEATHER WIDGET -->
+                <section id="weather-widget-wrapper">
+                    <h2>🌤️ My Weather Widgets</h2>
+                    <div id="widgetContainer"></div>
+                    <!-- Displays added AQI widgets -->
 
-                                    <!-- Submit button to trigger the search -->
-                                    <button type="submit">Search</button>
-                                </form>
-                            </section>
-                        <!-- </SEARCH> -->
+                    <button id="toggleBtn">Show Widget Creator</button>
+                    <!-- Reveals the input form -->
 
-                        <!-- <SHORTCUTS> -->
-                            <section aria-labelledby="shortcuts-heading">
-                                <h2 id="shortcuts-heading">My Shortcuts</h2>
+                    <div id="widgetCreator" style="display: none;">
+                        <div class="widget-actions">
+                            <button onclick="window.open('https://www.aqi.in/aqi-widget', '_blank')">Create Widget on AQI.in</button>
+                        </div>
 
-                                <!-- Where all folders and shortcuts will be displayed -->
-                                <div id="shortcuts"></div><br>
+                        <label for="widgetInput"><strong>Paste your AQI widget code here:</strong></label><br>
+                        <textarea id="widgetInput" placeholder="Paste widget code from aqi.in..."></textarea><br>
+                        <button id="saveBtn">Add Widget</button>
+                    </div>
+                </section>
 
-                                <!-- Button to toggle the visibility of the form section -->
-                                <button id="toggleFormBtn">＋</button>
+                <!-- NEWS WIDGET -->
+                <section id="news-widget-wrapper">
+                    <h2>Latest News</h2>
+                    <div id="news-widget">Loading news...</div>
+                    <!-- JS will fetch and render news stories -->
+                </section>
 
-                                <!-- The container for the two forms: Add Shortcut and Add Folder -->
-                                <div id="formContainer" style="display: none; margin-top: 10px;">
-                                    
-                                    <h3>Add Shortcut or Folder</h3>
+                <!-- PROTON SUITE (e.g., ProtonMail, Drive, etc.) -->
+                <section id="proton-apps-wrapper">
+                    <div class="app-grid" id="proton-apps"></div>
+                    <!-- Grid of Proton apps links injected dynamically -->
+                </section>
 
-                                    <!-- Form to add a new shortcut (name + URL) -->
-                                    <form id="shortcutForm" autocomplete="off">
-                                        <!-- Input for shortcut name -->
-                                        <input type="text" id="name" placeholder="Shortcut Name" required>
-                                        <!-- Input for shortcut URL -->
-                                        <input type="url" id="url" placeholder="https://example.com" required>
-                                        <!-- Dropdown to choose which folder to add the shortcut into -->
-                                        <select id="parentFolder">
-                                            <option value="">(Root)</option>
-                                        </select>
-                                        <!-- Submit button -->
-                                        <button type="submit">Add Shortcut</button>
-                                    </form>
+            </section>
+        </div>
+    </main>
 
-                                    <!-- Separate form to add a new folder -->
-                                    <form id="folderForm" style="margin-top: 10px;" autocomplete="off">
-                                        <!-- Input for folder name -->
-                                        <input type="text" id="folderName" placeholder="Folder Name" required>
-                                        <!-- Dropdown to choose the parent folder for this new folder -->
-                                        <select id="folderParent">
-                                            <option value="">(Root)</option>
-                                        </select>
-                                        <!-- Submit button -->
-                                        <button type="submit">Add Folder</button>
-                                    </form>
-                                </div>
-                            </section>
-                        <!-- </SHORTCUTS> -->
-
-                    </section>
-
-                    <!-- RIGHT COLUMN: Widgets -->
-                    <section class="right-column">
-                        
-                        <!-- <CLOCK WIDGET> -->
-                            <section id="clock-widget-wrapper">
-                                <div id="clock-widget"></div>
-                                <div id="date-widget" ></div>
-                            </section>
-                        <!-- </CLOCK WIDGET> -->
-
-                        <!-- <NOTES WIDGET> -->
-                            <section id="notes-area-wrapper">
-                                <h2 id="">My Notes</h2>
-                                <textarea id="notes-area" placeholder="Start typing..."></textarea>
-                            </section>
-                        <!-- </NOTES WIDGET> -->
-
-                        <!-- <QURAN WIDGET> -->
-                            <section id="Quran-widget-wrapper">
-                                <div id="Quran-widget">
-                                    <p id="ayah-arabic" style="font-size: 1.5em;"></p>
-                                    <p id="ayah-translation"></p>
-                                    <small id="ayah-info"></small>
-                                </div>                                  
-                            </section>
-                        <!-- </QURAN WIDGET> -->
-
-                        <!-- <WEATHER WIDGET> -->
-                            <section id="weather-widget-wrapper">
-                                <h2>🌤️ My Weather Widgets</h2>
-
-                                <!-- Widget container that always stays visible -->
-                                <div id="widgetContainer"></div>
-
-                                <!-- Toggle button to show/hide the widget creator interface -->
-                                <button id="toggleBtn">Show Widget Creator</button>
-
-                                <!-- Widget creator interface (toggleable) -->
-                                <div id="widgetCreator" style="display: none;">
-                                    <div class="widget-actions">
-                                        <button onclick="window.open('https://www.aqi.in/aqi-widget', '_blank')">Create Widget on AQI.in</button>
-                                    </div>
-
-                                    <label for="widgetInput"><strong>Paste your AQI widget code here:</strong></label><br>
-                                    <textarea id="widgetInput" placeholder="Paste widget code from aqi.in..."></textarea><br>
-                                    <button id="saveBtn">Add Widget</button>
-                                </div>
-
-                            </section>
-                        <!-- </WEATHER WIDGET> -->
-
-                        <!-- <NEWS WIDGET> -->
-                            <section id="news-widget-wrapper">
-                                <h2>Latest News</h2>
-                                <div id="news-widget">Loading news...</div>
-                            </section>
-                        <!-- </NEWS WIDGET> -->
-
-                        <!-- <PROTON SUITE WIDGET> -->
-                            <section id="proton-apps-wrapper">
-                                <div class="app-grid" id="proton-apps"></div>
-                            </section>
-                        <!-- </PROTON SUITE WIDGET> -->
-
-                    </section>
-                </div>
-        </main>
-
-        <script type="module" src="main.js"></script>
-    </body>
+    <!-- MODULE SCRIPT LOADER -->
+    <script type="module" src="main.js"></script> <!-- Loads main JavaScript logic using ES modules -->
+</body>
 </html>
