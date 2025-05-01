@@ -2,9 +2,8 @@ const widget = document.getElementById('news-widget');
 
 // List of RSS feed URLs
 const feeds = [
-  'https://rss.app/feeds/fm9SXrDIhjKot79V.xml',
-  'https://rss.app/feeds/MnGlMBmxwJFQ7lGF.xml',
-  'https://rss.app/feeds/GOSBxXiL7jar1cVO.xml'
+  'https://feeds.bbci.co.uk/news/rss.xml' ,
+  'https://www.aljazeera.com/xml/rss/all.xml' 
 ];
 
 // Function to fetch one RSS feed via rss2json
